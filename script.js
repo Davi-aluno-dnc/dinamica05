@@ -1,0 +1,61 @@
+const MOTO_CARD = [
+  {
+    title: "Scooter Elétrica Voltz EV1",
+    paragraph:
+      "O câmbio de 5 marchas da Scooter Elétrica Voltz EV1 oferece maior confiança e performance na pilotagem, tornando as subidas de marcha mais leves e as reduções mais suaves!",
+    img: "./assets/img-card-1.png",
+  },
+  {
+    title: "Honda CB 500X",
+    paragraph:
+      "O câmbio de 6 marchas da CB 500X oferece maior confiança e performance na pilotagem, tornando as subidas de marcha mais leves e as reduções mais suaves!",
+    img: "./assets/img-card-2.png",
+  },
+];
+
+const cardsElements = document.querySelectorAll(".carousel-cards li");
+const modalElelement = document.querySelector("#modal");
+
+let index = 0;
+
+const INTERVAL = 5000;
+
+function show(num) {
+  index = index + num;
+
+  if (index >= cardsElements.length) {
+    index = 0;
+  }
+  if (index < 0) {
+    index = cardsElements.length - 1;
+  }
+  cardsElements[index].scrollIntoView({ behavior: "smooth" });
+}
+
+function showModal(index) {
+
+  modalElelement.innerHTML = "";
+
+  modalElelement.innerHTML = ` 
+    <div class="modal-card">
+      <button onclick="closeModal()">
+        <img src="./assets/close-btn.png" alt="close-button" />
+      </button>
+      <h1>${MOTO_CARD[index].title}</h1>
+      <p>
+      ${MOTO_CARD[index].paragraph}
+      </p>
+      <img src="${MOTO_CARD[index].img}" alt="" />
+      <button ">Quero Assinar!</button>
+    </div>
+    `;
+    modalElelement.style.visibility = "visible";
+}
+
+setInterval(() => {
+  show(+1);
+}, INTERVAL);
+
+function closeModal() {
+  modalElelement.style.visibility = "hidden";
+}
